@@ -44,7 +44,7 @@ module Clearance
 
       included do
         validates :email,
-          email: true,
+          email: { strict_mode: Clearance.configuration.email_strict },
           presence: true,
           uniqueness: { allow_blank: true },
           unless: :email_optional?

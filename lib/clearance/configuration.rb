@@ -85,6 +85,11 @@ module Clearance
     # @return [ActiveRecord::Base]
     attr_accessor :user_model
 
+    # Controls whether validation on the email field of the User model is 
+    # set to strict.  Defualts to `true`.
+    # @return [Boolean]
+    attr_accessor :email_strict
+
     def initialize
       @allow_sign_up = true
       @cookie_expiration = ->(cookies) { 1.year.from_now.utc }
@@ -97,6 +102,7 @@ module Clearance
       @routes = true
       @secure_cookie = false
       @sign_in_guards = []
+      @email_strict = true
     end
 
     def user_model
