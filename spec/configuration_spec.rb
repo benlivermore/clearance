@@ -51,6 +51,29 @@ describe Clearance::Configuration do
     end
   end
 
+  context 'when email_strict is set to false' do
+    before do
+      Clearance.configure do |config|
+        config.email_strict = false
+      end
+    end
+
+    it 'returns false' do
+      expect(Clearance.configuration.email_strict).to eq false
+    end
+  end
+
+  context 'when email_strict is not specified' do
+    before do
+      Clearance.configure do |config|
+      end
+    end
+
+    it 'defaults to true' do
+      expect(Clearance.configuration.email_strict).to eq true
+    end
+  end
+
   context 'when no redirect URL specified' do
     it 'returns "/" as redirect URL' do
       expect(Clearance::Configuration.new.redirect_url).to eq '/'
